@@ -9,6 +9,6 @@ exports.omdb = {
   key: process.env.OMDB_Key
 };
 
-exports.omdb = {
+exports.bandsInTown = {
   key: process.env.BandsInTown
 };
