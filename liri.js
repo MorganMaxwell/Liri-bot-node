@@ -12,19 +12,19 @@ var spotify = new Spotify(keys.spotify);
 var omdb = keys.omdb.key;
 var bandsInTown = keys.bandsInTown.key;
 
-// grab userInput from command line
 var liriCommand = process.argv[2];
-var liriInput = process.arg[3];
+var liriInput = process.argv.slice(3).join(" ");
+
 // switch statement to process userInput
-switch (liriInput) {
+switch (liriCommand) {
     case "spotify-this-song":
-        spotify();
+        Spotify();
         break;
     case "concert-this":
         bit();
         break;
     case "movie-this":
-        omdb();
+        Omdb();
         break;
     case "do-what-it-says":
         txtFile();
@@ -32,16 +32,28 @@ switch (liriInput) {
 };
 
 // music
-function spotify() {
+function Spotify() {
+    spotify.search({ type: 'track', query: 'All the Small Things' }, function (err, data) {
+        if (err) {
+            return console.log('Error occurred: ' + err);
+        }
 
+        console.log(data);
+    });
 };
 // bit = Bands In Town
 function bit() {
-
+    axios.get(//todo)
+    ).then(function (response) {
+        console.log()//todo
+    });
 };
 // movies
-function omdb() {
-
+function Omdb() {
+    axios.get("http://www.omdbapi.com/?apikey=" + omdb + "&y=&plot=short&t=" + liriInput)
+        .then(function (response) {
+            console.log("Title: " + response.data.Title + "\nRelease Year: " + response.data.Year + "\nIMDB Rating: " + response.data.imdbRating + "\nCountry Produced: " + response.data.Country + "\nLanguage: " + response.data.Language + "\nPlot: " + response.data.Plot + "\nList of actors: " + response.data.Actors);
+        });
 };
 // run the process on a txt file of data
 function txtFile() {
